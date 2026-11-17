@@ -1,0 +1,33 @@
+{
+  "name": "uniquezer-ui",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@nuxtjs/proxy": "^2.1.0",
+    "@nuxtjs/sitemap": "^7.4.7",
+    "nuxt": "^4.2.0",
+    "nuxt-gtag": "^4.1.0",
+    "nuxt-yandex-metrika": "^1.2.9",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3",
+    "vuedraggable": "^4.1.0",
+    "vuetify": "^3.9.1"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.4.47",
+    "@nuxt/fonts": "^0.11.4",
+    "sass-embedded": "^1.89.2",
+    "typescript": "^5.8.3",
+    "vue-tsc": "^3.0.1",
+    "vuetify-nuxt-module": "^0.18.7"
+  }
+}
