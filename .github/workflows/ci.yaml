@@ -11,7 +11,6 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  REPOSITORY_OWNER: ${{ github.repository_owner }}
 
 jobs:
   build-api:
@@ -24,7 +23,7 @@ jobs:
 
       - name: Calculate Lowercase Image Name
         id: calculate_api
-        run: echo "image_name_lc=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-api" >> $GITHUB_OUTPUT
+        run: echo "image_name_lc=$(echo 'ghcr.io/${{ github.repository_owner }}/uniquezer-api' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Login to the registry
         uses: docker/login-action@v3
@@ -49,9 +48,9 @@ jobs:
           push: true
           tags: ${{ steps.meta_api.outputs.tags }}
           cache-from: |
-            type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-api:buildcache
-            type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-api:latest
-          cache-to: type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-api:buildcache,mode=max
+            type=registry,ref=${{ steps.calculate_api.outputs.image_name_lc }}:buildcache
+            type=registry,ref=${{ steps.calculate_api.outputs.image_name_lc }}:latest
+          cache-to: type=registry,ref=${{ steps.calculate_api.outputs.image_name_lc }}:buildcache,mode=max
 
   build-ui:
     runs-on: ubuntu-latest
@@ -64,7 +63,7 @@ jobs:
 
       - name: Calculate Lowercase Image Name
         id: calculate_ui
-        run: echo "image_name_lc=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-ui" >> $GITHUB_OUTPUT
+        run: echo "image_name_lc=$(echo 'ghcr.io/${{ github.repository_owner }}/uniquezer-ui' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Login to the registry
         uses: docker/login-action@v3
@@ -93,6 +92,6 @@ jobs:
             NUXT_PUBLIC_YANDEX_METRIKA_ID=${{ secrets.NUXT_PUBLIC_YANDEX_METRIKA_ID }}
             NODE_ENV=${{ secrets.NODE_ENV }}
           cache-from: |
-            type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-ui:buildcache
-            type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-ui:latest
-          cache-to: type=registry,ref=ghcr.io/${{ env.REPOSITORY_OWNER }}/uniquezer-ui:buildcache,mode=max
+            type=registry,ref=${{ steps.calculate_ui.outputs.image_name_lc }}:buildcache
+            type=registry,ref=${{ steps.calculate_ui.outputs.image_name_lc }}:latest
+          cache-to: type=registry,ref=${{ steps.calculate_ui.outputs.image_name_lc }}:buildcache,mode=max
