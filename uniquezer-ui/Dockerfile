@@ -1,6 +1,5 @@
 FROM node:lts-alpine AS build
 WORKDIR /app
-RUN corepack enable
 COPY package.json ./
 COPY package-lock.json ./
 RUN --mount=type=cache,target=/root/.npm npm install --ignore-scripts
