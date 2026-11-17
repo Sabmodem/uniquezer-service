@@ -1,4 +1,4 @@
-# 🖼️ Uniquezer
+# Uniquezer
 
 **A photo uniqueization service** that removes metadata and creates unique versions of images.
 
